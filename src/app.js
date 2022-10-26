@@ -12,7 +12,14 @@ document.querySelectorAll("[type=checkbox]").forEach(checkbox =>{
 
 var taskInput = document.getElementById('taskInput');
 var taskForm = document.getElementById('taskForm');
-var tasks = [];
+if(localStorage.getItem('tasks') == null){
+  var tasks =[];
+}else{
+  tasks = JSON.parse(localStorage.getItem('tasks'));
+}
+tasks.forEach(element => {
+  document.getElementById('taskList').innerHTML += '<li tabindex="-1" role="option" aria-checked="false"><div class="form-check mb-0"><input class="form-check-input" type="checkbox" value="" id="check1"><label class="form-check-label" for="check1">' + element + '</label></div></li>'
+});
 
 taskInput.onkeyup = function () {
   if (taskInput.value.length > 0) {
