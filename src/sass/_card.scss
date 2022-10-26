@@ -1,0 +1,145 @@
+.card {
+    background-color: $primary;
+    border: none;
+    &-to-do {
+        margin-bottom: $grid-gutter-width * .875;
+        .card-body {
+            padding: 0;
+            min-height: 335px;
+            ul {
+                list-style: none;
+                padding-left: 0;
+                margin-bottom: 0;
+                li {
+                    padding: $card-spacer-y $card-spacer-x;
+                    border-bottom: 1px solid $darkGrayBlue;
+                    cursor: pointer;
+                    &:last-child{
+                        margin-bottom: -1px;
+                    }
+                    .form-check-input {
+                        position: relative;
+                        z-index: 1;
+                        cursor: pointer;
+                        &:checked {
+                            background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fill='none' stroke='#{$form-check-input-checked-color}' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/></svg>"), linear-gradient(135deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+                            &:hover {
+                                &::before,
+                                &::after {
+                                    opacity: 0;
+                                }
+                            }
+                        }
+                        &:hover {
+                            &::before,
+                            &::after {
+                                opacity: 1;
+                            }
+                        }
+                        &:focus {
+                            box-shadow: none;
+                            border-color: $darkGrayBlue;
+                        }
+                        &::before {
+                            content: "";
+                            position: absolute;
+                            top: 0;
+                            right: 0;
+                            bottom: 0;
+                            left: 0;
+                            border-radius: inherit;
+                            background: linear-gradient(135deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+                            opacity: 0;
+                        }
+                        &::after {
+                            content: "";
+                            position: absolute;
+                            top: 1px;
+                            right: 0;
+                            bottom: 0;
+                            left: 1px;
+                            z-index: 2;
+                            border-radius: inherit;
+                            background: $primary;
+                            height: calc(1.25em - 4px);
+                            width: calc(1.25em - 4px);
+                            opacity: 0;
+                        }
+                    }
+                }
+            }
+        }
+        .card-footer {
+            ul {
+                list-style: none;
+                padding-left: 0;
+                margin-bottom: 0;
+                display: flex;
+                justify-content: center;
+                position: relative;
+                color: $link-color;
+                li {
+                    margin: 0 $spacer*.75;
+                    &:first-child {
+                        position: absolute;
+                        left: 0;
+                        margin: 0;
+                    }
+                    &:last-child {
+                        position: absolute;
+                        right: 0;
+                        margin: 0;
+                    }
+                    a {
+                        text-decoration: none;
+                        font-weight: $font-weight-medium;
+                        &:hover {
+                            color: $body-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &-add-task {
+        .card-body {
+            padding-left: calc(#{$card-spacer-x} + #{$spacer} * 2.125);
+            position: relative;
+            &::before {
+                content: "";
+                position: absolute;
+                top: 24px;
+                left: 24px;
+                height: $form-check-input-width;
+                width: $form-check-input-width;
+                border: 1px solid $darkGrayBlue;
+                border-radius: 50%;
+            }
+            .task-form {
+                margin-bottom: -3px;
+                display: flex;
+                input {
+                    background-color: transparent;
+                    border: none;
+                    &[type=text] {
+                        color:  $gray-400;
+                        flex-grow: 1;
+                        padding-top: 3px
+                    }
+                    &[type=submit] {
+                        display: none;
+                        transition: $transition-base;
+                        color: hsl(234, 11%, 52%);
+                    }
+                    &:focus-visible {
+                        outline: none
+                    }
+                    &::placeholder{
+                        color: hsl(234, 11%, 52%);
+                    }
+                }
+            }
+        }
+        margin-bottom: $spacer * 1.75;
+    }
+}

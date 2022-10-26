@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="stylesheet" href="sass/style.scss" />
+  
+  <title>Frontend Mentor | Todo app</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution { font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <h1>Todo</h1>
+      <div class="toggle-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26"><path fill="#FFF" fill-rule="evenodd" d="M13 21a1 1 0 011 1v3a1 1 0 11-2 0v-3a1 1 0 011-1zm-5.657-2.343a1 1 0 010 1.414l-2.121 2.121a1 1 0 01-1.414-1.414l2.12-2.121a1 1 0 011.415 0zm12.728 0l2.121 2.121a1 1 0 01-1.414 1.414l-2.121-2.12a1 1 0 011.414-1.415zM13 8a5 5 0 110 10 5 5 0 010-10zm12 4a1 1 0 110 2h-3a1 1 0 110-2h3zM4 12a1 1 0 110 2H1a1 1 0 110-2h3zm18.192-8.192a1 1 0 010 1.414l-2.12 2.121a1 1 0 01-1.415-1.414l2.121-2.121a1 1 0 011.414 0zm-16.97 0l2.121 2.12A1 1 0 015.93 7.344L3.808 5.222a1 1 0 011.414-1.414zM13 0a1 1 0 011 1v3a1 1 0 11-2 0V1a1 1 0 011-1z"/></svg>
+      </div>
+    </div>
+  </header>
+  <main class="main">
+    <div class="container">
+      <div class="card card-add-task">
+        <div class="card-body">
+          <form class="task-form" id="taskForm">
+            <input id="taskInput" type="text" placeholder="Create a new todo..."><input id="addTask" type="submit" value="Add" />
+          </form>
+        </div>
+      </div>
+      <div class="card card-to-do empty">
+        <div class="card-body">
+          <ul id="taskList" role="listbox" tabindex="0" aria-label="task list">
+            
+          </ul>
+        </div>
+        <div class="card-footer">
+          <ul>
+            <li><span id="count"></span> items left</li>
+            <li>
+              <a class="menu-item active" href="javascript:;">
+                All
+              </a>
+            </li>
+            <li>
+              <a class="menu-item" href="javascript:;">
+                Active
+              </a>
+            </li>
+            <li class="menu-item">
+              <a class="menu-item" href="javascript:;">
+                Completed
+              </a>
+            </li>
+            <li>
+              <a href="javascript:;">
+                Clear Completed
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="drag-drop">
+        <span>Drag and drop to reorder list</span>
+      </div>
+    </div>
+  </main>
+
+
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="https://github.com/Ivar112">Ivar</a>.
+  </div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+.header {
+    @include media-breakpoint-up (md) {
+        height: 320px;
+        background-image: url('../images/bg-desktop-dark.jpg');
+        padding-top: $grid-gutter-width;
+    }
+    background-image: url('../images/bg-mobile-dark.jpg');;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 240px;
+    padding-top: $grid-gutter-width * .8;
+    .container {
+        display: flex;
+        align-items: center;
+        h1 {
+            text-transform: uppercase;
+            color: $white;
+            letter-spacing: 12px;
+        }
+        .toggle-icon {
+            margin-left: auto;
+            svg {
+                transform: scale(.75);
+                vertical-align: baseline;
+            }
+        }
+    }
+}

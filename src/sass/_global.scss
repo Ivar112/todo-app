@@ -1,0 +1,25 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  .main {
+    @include media-breakpoint-up(md) {
+      margin-top: -160px;
+    }
+    margin-top: -120px;
+   
+    .drag-drop {
+      display: flex;
+      justify-content: center;
+      color: $link-color;
+    }
+  }
+  .attribution {
+    margin-top: auto;
+  }
+  .container {
+    @include media-breakpoint-up(md) {
+      max-width: 800px;
+    }
+  }
+}
