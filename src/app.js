@@ -31,12 +31,15 @@ taskInput.onkeyup = function () {
 
 taskForm.onsubmit = function (e) {
   e.preventDefault();
-  tasks.push(taskInput.value);
-  localStorage.setItem("tasks", JSON.stringify(tasks));
-  taskInput.value = '';
-  document.getElementById('addTask').style.display="none";
-  tasks = JSON.parse(localStorage.getItem("tasks"));
-  newTask = tasks.slice(-1);
-  document.getElementById('taskList').innerHTML += '<li tabindex="-1" role="option" aria-checked="false"><div class="form-check mb-0"><input class="form-check-input" type="checkbox" value="" id="check1"><label class="form-check-label" for="check1"></label>' + newTask + '</div></li>'
-  console.log(localStorage);
+  if (taskInput.value.length > 0) {
+    tasks.push(taskInput.value);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    taskInput.value = '';
+    document.getElementById('addTask').style.display="none";
+    tasks = JSON.parse(localStorage.getItem("tasks"));
+    console.log(tasks);
+    newTask = tasks.slice(-1);
+    document.getElementById('taskList').innerHTML += '<li tabindex="-1" role="option" aria-checked="false"><div class="form-check mb-0"><input class="form-check-input" type="checkbox" value="" id="check1"><label class="form-check-label" for="check1"></label>' + newTask + '</div></li>'
+    console.log(localStorage);
+  }
 };
