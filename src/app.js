@@ -18,7 +18,7 @@ if(localStorage.getItem('tasks') == null){
   tasks = JSON.parse(localStorage.getItem('tasks'));
 }
 tasks.forEach(element => {
-  document.getElementById('taskList').innerHTML += '<li tabindex="-1" role="option" aria-checked="false"><div class="form-check mb-0"><input class="form-check-input" type="checkbox" value="" id="check1"><label class="form-check-label" for="check1">' + element + '</label></div></li>'
+  document.getElementById('taskList').innerHTML += '<li tabindex="-1" role="option" aria-checked="false"><div class="form-check mb-0"><input class="form-check-input" type="checkbox" value="" id="check1"><label class="form-check-label" for="check1"></label>' + element + '</div></li>'
 });
 
 taskInput.onkeyup = function () {
@@ -37,6 +37,6 @@ taskForm.onsubmit = function (e) {
   document.getElementById('addTask').style.display="none";
   tasks = JSON.parse(localStorage.getItem("tasks"));
   newTask = tasks.slice(-1);
-  document.getElementById('taskList').innerHTML += '<li tabindex="-1" role="option" aria-checked="false"><div class="form-check mb-0"><input class="form-check-input" type="checkbox" value="" id="check1"><label class="form-check-label" for="check1">' + newTask + '</label></div></li>'
+  document.getElementById('taskList').innerHTML += '<li tabindex="-1" role="option" aria-checked="false"><div class="form-check mb-0"><input class="form-check-input" type="checkbox" value="" id="check1"><label class="form-check-label" for="check1"></label>' + newTask + '</div></li>'
   console.log(localStorage);
 };
