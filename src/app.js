@@ -69,9 +69,9 @@ taskForm.onsubmit = function (e) {
     newTask = Array.from(tasks.keys()).pop();
     console.log(newTask);
     document.getElementById('taskList').innerHTML += '<li tabindex="-1" role="option" aria-checked="false"><div class="form-check mb-0"><input class="form-check-input" type="checkbox" value="" id="check1"><label class="form-check-label" for="check1"></label>' + newTask + '</div></li>'
-    count.innerHTML = tasks.size;
     checkboxes();
-    checkCompleted();
+    countIncompleteTasks();
+    displayTaskCount();
   }
 };
 
