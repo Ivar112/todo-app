@@ -17,6 +17,10 @@
                     &:last-child{
                         margin-bottom: -1px;
                     }
+                    &[aria-checked="true"] {
+                        text-decoration: line-through;
+                        color: $darkGrayBlue;
+                    }
                     .form-check-input {
                         position: relative;
                         z-index: 1;
