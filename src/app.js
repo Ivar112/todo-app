@@ -2,6 +2,7 @@ var taskInput = document.getElementById('taskInput');
 var taskForm = document.getElementById('taskForm');
 var taskCounter = document.getElementById('count');
 var taskCount = 0;
+var menuItems = document.querySelectorAll('.menu-item');
 
 if(localStorage.getItem('tasks') == null){
   var tasks = new Map();
@@ -94,3 +95,11 @@ let checkboxes = function () {
 }
 
 checkboxes();
+
+menuItems.forEach(item =>{ 
+  item.addEventListener("click",function() {
+      var activeItem = document.getElementsByClassName("active");
+      activeItem[0].classList.remove('active');
+      item.classList.add('active');
+  });
+});
