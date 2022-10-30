@@ -1,17 +1,43 @@
 var taskInput = document.getElementById('taskInput');
 var taskForm = document.getElementById('taskForm');
-var count = document.getElementById('count');
+var taskCounter = document.getElementById('count');
+var taskCount = 0;
 
 if(localStorage.getItem('tasks') == null){
-  var tasks =[];
+  var tasks = new Map();
 }else{
-  tasks = JSON.parse(localStorage.getItem('tasks'));
-  tasks.forEach(element => {
-    document.getElementById('taskList').innerHTML += '<li tabindex="-1" role="option" aria-checked="false"><div class="form-check mb-0"><input class="form-check-input" type="checkbox" value="" id="check1"><label class="form-check-label" for="check1"></label>' + element + '</div></li>'
-  });
+  tasks = new Map(JSON.parse(localStorage.tasks));
+  i = 0;
+  for (let [key, value] of tasks.entries()) {
+    i ++;
+    if (value === 'incomplete') {
+      var taskStatus = false;
+      
+    } else {
+      var taskStatus = true;
+      
+    }
+    document.getElementById('taskList').innerHTML += '<li tabindex="-1" role="option" aria-checked="' + taskStatus + '"><div class="form-check mb-0"><input class="form-check-input" type="checkbox" value="" id="check' + i + '"><label class="form-check-label" for="check' + i + '"></label>' + key + '</div></li>';
+  };
 }
 
-count.innerHTML = tasks.length;
+let countIncompleteTasks = function () {
+  i = 0;
+  for (let value of tasks.values()) {
+    if (value === 'incomplete') {
+      i++;
+    }
+  };
+  taskCount = i;
+}
+countIncompleteTasks();
+
+
+let displayTaskCount = function () {
+  taskCounter.innerHTML = taskCount;
+}
+displayTaskCount();
+
 
 taskInput.onkeyup = function () {
   if (taskInput.value.length > 0) {
@@ -24,27 +50,40 @@ taskInput.onkeyup = function () {
 taskForm.onsubmit = function (e) {
   e.preventDefault();
   if (taskInput.value.length > 0) {
-    tasks.push(taskInput.value);
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+    tasks.set(taskInput.value, 'incomplete');
+    console.log(tasks);
+    localStorage.tasks = JSON.stringify(Array.from(tasks.entries()));
     taskInput.value = '';
     document.getElementById('addTask').style.display="none";
-    tasks = JSON.parse(localStorage.getItem("tasks"));
-    newTask = tasks.slice(-1);
+    newTask = Array.from(tasks.keys()).pop();
+    console.log(newTask);
     document.getElementById('taskList').innerHTML += '<li tabindex="-1" role="option" aria-checked="false"><div class="form-check mb-0"><input class="form-check-input" type="checkbox" value="" id="check1"><label class="form-check-label" for="check1"></label>' + newTask + '</div></li>'
-    count.innerHTML = tasks.length;
+    count.innerHTML = tasks.size;
+    checkboxes();
   }
 };
 
 // COMPLETE TASKS
 
-document.querySelectorAll("[type=checkbox]").forEach(checkbox =>{
-  checkbox.addEventListener("click",function(e){
-    if(this.checked){
-          this.parentElement.parentElement.setAttribute("aria-checked", "true");
-    }
-    else{
+let checkboxes = function () {
+  document.querySelectorAll("[type=checkbox]").forEach(checkbox =>{
+    checkbox.addEventListener("click",function(e){
+      taskToToggle = this.parentElement.textContent;
+      if(this.checked){
+        tasks.set(taskToToggle, 'completed');
+        this.parentElement.parentElement.setAttribute("aria-checked", "true");
+      }
+      else{
         this.parentElement.parentElement.setAttribute("aria-checked", "false");
-    }
-    e.stopPropagation();
+        tasks.set(taskToToggle, 'incomplete');
+      }
+      countIncompleteTasks();
+      console.log(taskCount);
+      displayTaskCount();
+      localStorage.tasks = JSON.stringify(Array.from(tasks.entries()));
+      e.stopPropagation();
+    })
   })
-})
+}
+
+checkboxes();
