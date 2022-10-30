@@ -12,14 +12,21 @@ if(localStorage.getItem('tasks') == null){
     i ++;
     if (value === 'incomplete') {
       var taskStatus = false;
-      
     } else {
       var taskStatus = true;
-      
     }
     document.getElementById('taskList').innerHTML += '<li tabindex="-1" role="option" aria-checked="' + taskStatus + '"><div class="form-check mb-0"><input class="form-check-input" type="checkbox" value="" id="check' + i + '"><label class="form-check-label" for="check' + i + '"></label>' + key + '</div></li>';
   };
 }
+
+var getCheckboxes = document.querySelectorAll("[type=checkbox]");
+i = -1;
+for (let [key, value] of tasks.entries()) {
+  i ++;
+  if (value === 'completed') {
+   getCheckboxes[i].checked = true;
+  }
+};
 
 let countIncompleteTasks = function () {
   i = 0;
