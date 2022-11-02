@@ -1,12 +1,17 @@
+import Sortable from 'sortablejs';
+
 var taskInput = document.getElementById('taskInput');
 var taskForm = document.getElementById('taskForm');
 var taskCounter = document.getElementById('count');
 var taskCount = 0;
 var menuItems = document.querySelectorAll('.menu-item');
+var taskList = document.getElementById('taskList');
+var sortable = Sortable.create(taskList, {
+  animation: 150,
+  filter: ".delete-task, input",
+});
 
-if(localStorage.getItem('tasks') == null){
-  var tasks = new Map();
-}else{
+let initTasks = function () {
   tasks = new Map(JSON.parse(localStorage.tasks));
   i = 0;
   for (let [key, value] of tasks.entries()) {
@@ -16,8 +21,14 @@ if(localStorage.getItem('tasks') == null){
     } else {
       var taskStatus = true;
     }
-    document.getElementById('taskList').innerHTML += '<li tabindex="-1" role="option" aria-checked="' + taskStatus + '"><div class="form-check mb-0"><input class="form-check-input" type="checkbox" value="" id="check' + i + '"><label class="form-check-label" for="check' + i + '"></label>' + key + '</div></li>';
+    document.getElementById('taskList').innerHTML += '<li tabindex="-1" role="option" aria-checked="' + taskStatus + '"><div class="form-check mb-0"><input class="form-check-input" type="checkbox" value="" id="check' + i + '"><label class="form-check-label" for="check' + i + '"></label>' + key + '</div><svg class="delete-task" xmlns="http://www.w3.org/2000/svg" width="18" height="18"><path fill="#494C6B" fill-rule="evenodd" d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"/></svg></li>';
   };
+}
+
+if(localStorage.getItem('tasks') == null){
+  var tasks = new Map();
+}else{
+  initTasks();
 }
 
 let checkCompleted = function () {
@@ -68,10 +79,11 @@ taskForm.onsubmit = function (e) {
     document.getElementById('addTask').style.display="none";
     newTask = Array.from(tasks.keys()).pop();
     console.log(newTask);
-    document.getElementById('taskList').innerHTML += '<li tabindex="-1" role="option" aria-checked="false"><div class="form-check mb-0"><input class="form-check-input" type="checkbox" value="" id="check1"><label class="form-check-label" for="check1"></label>' + newTask + '</div></li>'
+    document.getElementById('taskList').innerHTML += '<li tabindex="-1" role="option" aria-checked="false"><div class="form-check mb-0"><input class="form-check-input" type="checkbox" value="" id="check1"><label class="form-check-label" for="check1"></label>' + newTask + '</div><svg class="delete-task" xmlns="http://www.w3.org/2000/svg" width="18" height="18"><path fill="#494C6B" fill-rule="evenodd" d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"/></svg></li>'
     checkboxes();
     countIncompleteTasks();
     displayTaskCount();
+    enableDelete();
   }
 };
 
@@ -107,3 +119,26 @@ menuItems.forEach(item =>{
       item.classList.add('active');
   });
 });
+
+// DELETE TASKS
+
+let enableDelete = function () {
+  var deleteTask = document.querySelectorAll('.delete-task');
+  deleteTask.forEach(task =>{ 
+    task.addEventListener("click",function(e) {
+      e.stopPropagation();
+      var taskToDelete = this.parentElement.children[0].textContent;
+      if (confirm('Are you sure you want to delete "' + taskToDelete + '" from you todo list?' )) {
+        tasks.delete(taskToDelete);
+        localStorage.tasks = JSON.stringify(Array.from(tasks.entries()));
+        document.getElementById('taskList').innerHTML = '';
+        initTasks();
+        checkboxes();
+        countIncompleteTasks();
+        displayTaskCount();
+        enableDelete();
+      }
+    });
+  });
+}
+enableDelete();

@@ -14,6 +14,11 @@
                     padding: $card-spacer-y $card-spacer-x;
                     border-bottom: 1px solid $darkGrayBlue;
                     cursor: pointer;
+                    position: relative;
+                    &.sortable-chosen {
+                        border-top: 1px solid $darkGrayBlue;
+                        background: rgba($white, .1);
+                    }
                     &:last-child{
                         margin-bottom: -1px;
                     }
@@ -68,6 +73,21 @@
                             height: calc(1.25em - 4px);
                             width: calc(1.25em - 4px);
                             opacity: 0;
+                        }
+                    }
+                    .delete-task {
+                        position: absolute;
+                        top: 50%;
+                        right: $spacer * 1.5;
+                        transform: translateY(-50%);
+                        transition: $transition-base;
+                        @include media-breakpoint-up(md) {
+                            opacity: 0;
+                        }
+                    }
+                    &:hover {
+                        .delete-task {
+                            opacity: 1;
                         }
                     }
                 }
