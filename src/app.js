@@ -91,6 +91,7 @@ taskForm.onsubmit = function (e) {
     countIncompleteTasks();
     displayTaskCount();
     enableDelete();
+    checkLength();
   }
 };
 
@@ -146,6 +147,7 @@ let enableDelete = function () {
         displayTaskCount();
         enableDelete();
         checkCompleted();
+        checkLength();
       }
     });
   });
@@ -160,6 +162,7 @@ var rebuildList = function() {
   displayTaskCount();
   enableDelete();
   checkCompleted();
+  checkLength();
 }
 
 document.getElementById('active').addEventListener("click",function() {
@@ -195,3 +198,10 @@ document.getElementById('clear').addEventListener("click",function() {
     rebuildList();
   }
 });
+
+let checkLength = function() {
+  if (taskList.children.length > 0) {
+    document.getElementsByClassName("card-to-do")[0].classList.remove('empty');
+  } else document.getElementsByClassName("card-to-do")[0].classList.add('empty');
+}
+checkLength();
