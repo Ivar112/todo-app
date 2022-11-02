@@ -6,22 +6,25 @@ var taskCounter = document.getElementById('count');
 var taskCount = 0;
 var menuItems = document.querySelectorAll('.menu-item');
 var taskList = document.getElementById('taskList');
-var sortable = Sortable.create(taskList, {
+Sortable.create(taskList, {
   animation: 150,
   filter: ".delete-task, input",
 });
+var statuses = ['incomplete', 'completed'];
 
 let initTasks = function () {
   tasks = new Map(JSON.parse(localStorage.tasks));
   i = 0;
   for (let [key, value] of tasks.entries()) {
-    i ++;
-    if (value === 'incomplete') {
-      var taskStatus = false;
-    } else {
-      var taskStatus = true;
+    if (statuses.includes(value)) {
+      i ++;
+      if (value === 'incomplete') {
+        var taskStatus = false;
+      } else {
+        var taskStatus = true;
+      }
+      document.getElementById('taskList').innerHTML += '<li tabindex="-1" role="option" aria-checked="' + taskStatus + '"><div class="form-check mb-0"><input class="form-check-input" type="checkbox" value="" id="check' + i + '"><label class="form-check-label" for="check' + i + '"></label>' + key + '</div><svg class="delete-task" xmlns="http://www.w3.org/2000/svg" width="18" height="18"><path fill="#494C6B" fill-rule="evenodd" d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"/></svg></li>';
     }
-    document.getElementById('taskList').innerHTML += '<li tabindex="-1" role="option" aria-checked="' + taskStatus + '"><div class="form-check mb-0"><input class="form-check-input" type="checkbox" value="" id="check' + i + '"><label class="form-check-label" for="check' + i + '"></label>' + key + '</div><svg class="delete-task" xmlns="http://www.w3.org/2000/svg" width="18" height="18"><path fill="#494C6B" fill-rule="evenodd" d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"/></svg></li>';
   };
 }
 
@@ -35,9 +38,11 @@ let checkCompleted = function () {
   var getCheckboxes = document.querySelectorAll("[type=checkbox]");
   i = -1;
   for (let [key, value] of tasks.entries()) {
-    i ++;
-    if (value === 'completed') {
-     getCheckboxes[i].checked = true;
+    if (statuses.includes(value)) {
+      i ++;
+      if (value === 'completed') {
+       getCheckboxes[i].checked = true;
+      }
     }
   };
 }
@@ -128,7 +133,7 @@ let enableDelete = function () {
     task.addEventListener("click",function(e) {
       e.stopPropagation();
       var taskToDelete = this.parentElement.children[0].textContent;
-      if (confirm('Are you sure you want to delete "' + taskToDelete + '" from you todo list?' )) {
+      if (confirm('Are you sure you want to delete "' + taskToDelete + '" from your todo list?' )) {
         tasks.delete(taskToDelete);
         localStorage.tasks = JSON.stringify(Array.from(tasks.entries()));
         document.getElementById('taskList').innerHTML = '';
@@ -137,8 +142,41 @@ let enableDelete = function () {
         countIncompleteTasks();
         displayTaskCount();
         enableDelete();
+        checkCompleted();
       }
     });
   });
 }
 enableDelete();
+
+var rebuildList = function() {
+  document.getElementById('taskList').innerHTML = '';
+  initTasks();
+  checkboxes();
+  countIncompleteTasks();
+  displayTaskCount();
+  enableDelete();
+  checkCompleted();
+}
+
+document.getElementById('active').addEventListener("click",function() {
+  if (statuses != ['incomplete']) {
+    statuses = ['incomplete'];
+    document.getElementById('taskList').innerHTML = '';
+    rebuildList();
+  }
+});
+
+document.getElementById('completed').addEventListener("click",function() {
+  if (statuses != ['completed']) {
+    statuses = ['completed'];
+    rebuildList();
+  }
+});
+
+document.getElementById('all').addEventListener("click",function() {
+  if (statuses != ['incomplete', 'completed']) {
+    statuses = ['incomplete', 'completed'];
+    rebuildList();
+  }
+});
