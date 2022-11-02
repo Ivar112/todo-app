@@ -74,6 +74,8 @@ taskInput.onkeyup = function () {
   }
 };
 
+//ADD TASKS
+
 taskForm.onsubmit = function (e) {
   e.preventDefault();
   if (taskInput.value.length > 0) {
@@ -178,6 +180,18 @@ document.getElementById('completed').addEventListener("click",function() {
 document.getElementById('all').addEventListener("click",function() {
   if (statuses != ['incomplete', 'completed']) {
     statuses = ['incomplete', 'completed'];
+    rebuildList();
+  }
+});
+
+document.getElementById('clear').addEventListener("click",function() {
+  if (confirm('Are you sure you want to delete all completed tasks?')) {
+    for (let [key, value] of tasks.entries()) { 
+      if (value == 'completed') {
+        tasks.delete(key);
+      }
+    }
+    localStorage.tasks = JSON.stringify(Array.from(tasks.entries()));
     rebuildList();
   }
 });
