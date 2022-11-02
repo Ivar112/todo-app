@@ -111,6 +111,7 @@ let checkboxes = function () {
       displayTaskCount();
       localStorage.tasks = JSON.stringify(Array.from(tasks.entries()));
       e.stopPropagation();
+      rebuildList();
     })
   })
 }
