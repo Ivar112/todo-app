@@ -118,8 +118,11 @@
                 }
                 &.toggle-menu {
                     @include media-breakpoint-up(md) {
-                        margin: 0;
+                        margin: 0 auto;
                         padding: 0;
+                        max-width: fit-content;
+                        position: relative;
+                        z-index: 2;
                     }
                     margin: 72px (-$spacer * 1.5) 0 (-$spacer * 1.5);
                     padding: $card-cap-padding-y $card-cap-padding-x;
