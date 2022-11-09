@@ -37,7 +37,7 @@ if(localStorage.getItem('tasks') == null){
 
 let checkCompleted = function () {
   var getCheckboxes = document.querySelectorAll("[type=checkbox]");
-  i = -1;
+  let i = -1;
   for (let [key, value] of tasks.entries()) {
     if (statuses.includes(value)) {
       i ++;
@@ -50,7 +50,7 @@ let checkCompleted = function () {
 checkCompleted();
 
 let countIncompleteTasks = function () {
-  i = 0;
+  let i = 0;
   for (let value of tasks.values()) {
     if (value === 'incomplete') {
       i++;
