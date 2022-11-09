@@ -3,6 +3,7 @@
     border: none;
     &-to-do {
         margin-bottom: $grid-gutter-width * .875;
+        box-shadow: $card-box-shadow;
         .card-body {
             padding: 0;
             min-height: 335px;
