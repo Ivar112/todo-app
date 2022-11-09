@@ -6,6 +6,7 @@ var taskCounter = document.getElementById('count');
 var taskCount = 0;
 var menuItems = document.querySelectorAll('.menu-item');
 var taskList = document.getElementById('taskList');
+var toggleIcon = document.getElementById('toggleIcon');
 Sortable.create(taskList, {
   animation: 150,
   filter: ".delete-task, input",
@@ -205,3 +206,26 @@ let checkLength = function() {
   } else document.getElementsByClassName("card-to-do")[0].classList.add('empty');
 }
 checkLength();
+
+if (localStorage.getItem("theme") == null) {
+  var currentTheme = "dark";
+} else {
+  var currentTheme = localStorage.getItem("theme");
+}
+
+if (currentTheme == "light") {
+  document.body.classList.add("light");
+}
+
+toggleIcon.addEventListener("click",function() { 
+  document.querySelectorAll(".icon").forEach(icon =>{
+    icon.classList.toggle('current');
+  });
+  document.body.classList.toggle('light');
+  if (document.body.classList.contains('light')){
+    currentTheme = "light";
+  } else {
+    currentTheme = "dark";
+  };
+  localStorage.setItem("theme", currentTheme);
+});

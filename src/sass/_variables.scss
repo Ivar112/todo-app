@@ -50,6 +50,7 @@ $yellow:  #ffc107;
 $green:   #198754;
 $teal:    #20c997;
 $cyan:    #0dcaf0;
+$darkGrayBlue: hsl(237, 14%, 26%);
 // scss-docs-end color-variables
 
 // scss-docs-start colors-map
@@ -879,7 +880,7 @@ $form-check-transition:                   null;
 $form-check-input-active-filter:          brightness(90%);
 
 $form-check-input-bg:                     transparent;
-$form-check-input-border:                 1px solid $darkGrayBlue;
+$form-check-input-border:                 1px solid var(--#{$prefix}border-color-translucent);
 $form-check-input-border-radius:          50%;
 $form-check-radio-border-radius:          50%;
 $form-check-input-focus-border:           $input-focus-border-color;
@@ -887,7 +888,7 @@ $form-check-input-focus-box-shadow:       $input-btn-focus-box-shadow;
 
 $form-check-input-checked-color:          $component-active-color;
 $form-check-input-checked-bg-color:       $component-active-bg;
-$form-check-input-checked-border-color:   $form-check-input-checked-bg-color;
+$form-check-input-checked-border-color:   var(--#{$prefix}border-color-translucent);
 $form-check-input-checked-bg-image:       url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fill='none' stroke='#{$form-check-input-checked-color}' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/></svg>");
 $form-check-radio-checked-bg-image:       url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='2' fill='#{$form-check-input-checked-color}'/></svg>");
 

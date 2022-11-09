@@ -30,4 +30,13 @@ body {
       max-width: 800px;
     }
   }
+
+  &.light {
+    // CSS variables
+    --bs-body-bg: hsl(0, 0%, 98%);
+    --bs-primary: hsl(0, 0%, 100%);
+    --bs-body-color: hsl(235, 19%, 35%);
+    --bs-border-color-translucent: hsl(236, 33%, 92%);
+  }
+
 }

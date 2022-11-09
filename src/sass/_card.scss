@@ -1,5 +1,5 @@
 .card {
-    background-color: $primary;
+    background-color: var(--bs-primary);
     border: none;
     &-to-do {
         margin-bottom: $grid-gutter-width * .875;
@@ -15,11 +15,11 @@
                 margin-bottom: 0;
                 li {
                     padding: $card-spacer-y $card-spacer-x;
-                    border-bottom: 1px solid $darkGrayBlue;
+                    border-bottom: 1px solid var(--bs-border-color-translucent);
                     cursor: pointer;
                     position: relative;
                     &.sortable-chosen {
-                        border-top: 1px solid $darkGrayBlue;
+                        border-top: 1px solid var(--bs-border-color-translucent);
                         background: rgba($white, .1);
                     }
                     &:last-child{
@@ -50,7 +50,7 @@
                         }
                         &:focus {
                             box-shadow: none;
-                            border-color: $darkGrayBlue;
+                            border-color: var(--bs-border-color-translucent);
                         }
                         &::before {
                             content: "";
@@ -72,7 +72,7 @@
                             left: 1px;
                             z-index: 2;
                             border-radius: inherit;
-                            background: $primary;
+                            background: var(--bs-primary);
                             height: calc(1.25em - 4px);
                             width: calc(1.25em - 4px);
                             opacity: 0;
@@ -126,7 +126,7 @@
                     }
                     margin: 72px (-$spacer * 1.5) 0 (-$spacer * 1.5);
                     padding: $card-cap-padding-y $card-cap-padding-x;
-                    background-color: $primary;
+                    background-color: --bs-primary;
                     justify-content: center;
                     border-radius: $card-border-radius;
                 }
@@ -168,7 +168,7 @@
                 left: 24px;
                 height: $form-check-input-width;
                 width: $form-check-input-width;
-                border: 1px solid $darkGrayBlue;
+                border: 1px solid var(--bs-border-color-translucent);
                 border-radius: 50%;
             }
             .task-form {
