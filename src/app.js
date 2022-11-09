@@ -85,7 +85,7 @@ taskForm.onsubmit = function (e) {
     localStorage.tasks = JSON.stringify(Array.from(tasks.entries()));
     taskInput.value = '';
     document.getElementById('addTask').style.display="none";
-    newTask = Array.from(tasks.keys()).pop();
+    let newTask = Array.from(tasks.keys()).pop();
     console.log(newTask);
     document.getElementById('taskList').innerHTML += '<li tabindex="-1" role="option" aria-checked="false"><div class="form-check mb-0"><input class="form-check-input" type="checkbox" value="" id="check1"><label class="form-check-label" for="check1"></label>' + newTask + '</div><svg class="delete-task" xmlns="http://www.w3.org/2000/svg" width="18" height="18"><path fill="#494C6B" fill-rule="evenodd" d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"/></svg></li>'
     checkboxes();
