@@ -77,10 +77,16 @@ taskInput.onkeyup = function () {
 
 //ADD TASKS
 
+let i = 0;
 taskForm.onsubmit = function (e) {
   e.preventDefault();
   if (taskInput.value.length > 0) {
-    tasks.set(taskInput.value, 'incomplete');
+    if (Array.from(tasks.keys()).includes(taskInput.value)){
+      i++;
+      tasks.set(taskInput.value + '(' + i + ')', 'incomplete')
+    } else {
+      tasks.set(taskInput.value, 'incomplete');
+    }
     localStorage.tasks = JSON.stringify(Array.from(tasks.entries()));
     taskInput.value = '';
     document.getElementById('addTask').style.display="none";
