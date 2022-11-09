@@ -179,7 +179,7 @@
                     background-color: transparent;
                     border: none;
                     &[type=text] {
-                        color:  $gray-400;
+                        color:  var(--bs-gray-400);
                         flex-grow: 1;
                         padding-top: 3px
                     }
