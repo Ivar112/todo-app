@@ -14,7 +14,6 @@ Sortable.create(taskList, {
 var statuses = ['incomplete', 'completed'];
 
 let initTasks = function () {
-  var tasks = new Map(JSON.parse(localStorage.tasks));
   let i = 0;
   for (let [key, value] of tasks.entries()) {
     if (statuses.includes(value)) {
@@ -32,6 +31,7 @@ let initTasks = function () {
 if(localStorage.getItem('tasks') == null){
   var tasks = new Map();
 }else{
+  tasks = new Map(JSON.parse(localStorage.tasks));
   initTasks();
 }
 
