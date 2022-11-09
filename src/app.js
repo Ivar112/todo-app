@@ -101,7 +101,7 @@ taskForm.onsubmit = function (e) {
 let checkboxes = function () {
   document.querySelectorAll("[type=checkbox]").forEach(checkbox =>{
     checkbox.addEventListener("click",function(e){
-      taskToToggle = this.parentElement.textContent;
+      let taskToToggle = this.parentElement.textContent;
       if(this.checked){
         tasks.set(taskToToggle, 'completed');
         this.parentElement.parentElement.setAttribute("aria-checked", "true");
